@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15.5-alpine
@@ -12,6 +10,18 @@ services:
     volumes:
       - ~/DockerVolumes/studyhub/postgres:/var/lib/postgresql/data
       - ./create-dbs.sql:/docker-entrypoint-initdb.d/create-dbs.sql
+    restart: always
+
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=${JWT_SECRET}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    depends_on:
+      - postgres
     restart: always
 
 volumes:
