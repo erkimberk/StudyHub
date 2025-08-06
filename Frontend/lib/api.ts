@@ -279,6 +279,11 @@ class ApiClient {
     return this.request<any>(`/student/${id}`)
   }
 
+ async getEnrolledStudents(classroomId: string) {
+    return this.request<any[]>(`/student/classroom/${classroomId}`)
+  }
+
+
   async createStudent(data: {
     firstName: string
     lastName: string
