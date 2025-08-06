@@ -4,9 +4,11 @@ services:
     ports:
       - "${PORT:-8080}:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=render
+      - SPRING_PROFILES_ACTIVE=production
       - JWT_SECRET=${JWT_SECRET}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - DATABASE_URL=${DATABASE_URL}
-      - PORT=${PORT:-8080}
+      - SPRING_DATASOURCE_URL=${DATABASE_URL}
+      - SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}
+      - SERVER_PORT=${PORT:-8080}
     restart: always
